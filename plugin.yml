@@ -1,0 +1,7 @@
+name: AxStats
+main: me.DMan16.AxStats.AxStats
+depend: [AxUtils]
+version: 1.0
+description: Stats for Aldreda
+author: DMan16
+api-version: 1.16
