@@ -71,12 +71,12 @@ public class AxStatType {
 		return attribute;
 	}
 	
-	public Pair<Attribute,AttributeModifier> attribute(float val, boolean percent, EquipmentSlot slot) {
-		if (attribute() == null || slot == null) return null;
+	public Pair<Attribute,AttributeModifier> attribute(float val, boolean percent, EquipSlot slot) {
+		if (attribute() == null || slot == null || (slot.slot() == null && slot != EquipSlot.SET)) return null;
 		float amount = val * mult;
 		if (percent) amount /= 100f; 
 		return Pair.of(attribute(), new AttributeModifier(UUID.randomUUID(),"axstat_" + key + "_" + slot.name().toLowerCase(),amount,
-				percent ? Operation.MULTIPLY_SCALAR_1 : Operation.ADD_NUMBER,slot));
+				percent ? Operation.MULTIPLY_SCALAR_1 : Operation.ADD_NUMBER,slot.slot()));
 	}
 	
 	public float mult() {

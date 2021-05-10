@@ -9,10 +9,11 @@ public enum EquipSlot {
     LEGS(EquipmentSlot.LEGS),
     CHEST(EquipmentSlot.CHEST),
     HEAD(EquipmentSlot.HEAD),
-    RING,
+	SET,
+	RING,
     NECKLACE,
     ;
-	
+
 	private EquipmentSlot slot;
 
 	EquipSlot() {

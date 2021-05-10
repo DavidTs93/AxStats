@@ -1,13 +1,13 @@
 package me.DMan16.AxStats;
 
-import java.util.Objects;
-
+import me.Aldreda.AxUtils.Classes.Pair;
+import net.kyori.adventure.text.Component;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.EquipmentSlot;
+import org.jetbrains.annotations.NotNull;
 
-import me.Aldreda.AxUtils.Classes.Pair;
-import net.kyori.adventure.text.Component;
+import java.util.Objects;
 
 public class AxStat {
 	private final AxStatType type;
@@ -16,12 +16,12 @@ public class AxStat {
 	private final boolean percent;
 	private final EquipSlot slot;
 	private final Component line;
-	
-	public AxStat(AxStatType type, float val1, Float val2, boolean percent, EquipmentSlot slot) {
+
+	public AxStat(@NotNull AxStatType type, float val1, Float val2, boolean percent, EquipmentSlot slot) {
 		this(type,val1,val2,percent,EquipSlot.getByEquipmentSlot(slot));
 	}
 	
-	public AxStat(AxStatType type, float val1, Float val2, boolean percent, EquipSlot slot) {
+	public AxStat(@NotNull AxStatType type, float val1, Float val2, boolean percent, EquipSlot slot) {
 		this.type = Objects.requireNonNull(Objects.requireNonNull(type,"Stat type cannot be null!").isRegistered() ? type : null,"Stat type must be registered!");
 		this.val1 = val1;
 		this.val2 = this.type.requires2Values() ? val2 : null;
@@ -55,7 +55,7 @@ public class AxStat {
 	}
 	
 	public Pair<Attribute,AttributeModifier> attribute() {
-		return type.attribute(val1,percent,slot.slot());
+		return type.attribute(val1,percent,slot);
 	}
 	
 	public AxStat join(AxStat stat) {
