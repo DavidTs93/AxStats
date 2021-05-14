@@ -7,6 +7,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
 public class AxStats extends JavaPlugin {
 	private static AxStats instance = null;
 	
@@ -70,6 +74,26 @@ public class AxStats extends JavaPlugin {
 	public void onDisable() {
 		Bukkit.getScheduler().cancelTasks(this);
 		Utils.chatColorsLogPlugin("&fAxStats &adisabed");
+	}
+	
+	public static List<AxStat> joinStats(List<AxStat> stats) {
+		if (stats == null) return null;
+		List<AxStat> joinedStats = new ArrayList<AxStat>();
+		for (AxStat stat : stats) if (stat != null && stat.val1() != 0) {
+			ListIterator<AxStat> iter = joinedStats.listIterator();
+			boolean found = false;
+			while (iter.hasNext()) {
+				AxStat joined = iter.next().join(stat);
+				if (joined != null) {
+					found = true;
+					if (joined.val1() != 0) iter.set(joined);
+					else iter.remove();
+					break;
+				}
+			}
+			if (!found) joinedStats.add(stat);
+		}
+		return joinedStats;
 	}
 	
 	public static AxStats getInstance() {

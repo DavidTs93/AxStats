@@ -59,8 +59,16 @@ public class AxStat {
 	}
 	
 	public AxStat join(AxStat stat) {
-		if (stat.type.equals(type) && stat.percent == percent && stat.slot.equals(slot))
-			return new AxStat(type,val1 + stat.val1,val2 == null ? null : val2 + stat.val2,percent,slot);
+		if (stat == null) return null;
+		Float v;
+		if (val2 == null)
+			v = stat.val2;
+		else if (stat.val2 == null)
+			v = val2;
+		else
+			v = val2 + stat.val2;
+		if (stat.type.equals(type) && stat.percent == percent && stat.slot == slot)
+			return new AxStat(type,val1 + stat.val1,v,percent,slot);
 		return null;
 	}
 }
