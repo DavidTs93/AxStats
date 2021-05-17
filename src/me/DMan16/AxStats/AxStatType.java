@@ -1,22 +1,21 @@
 package me.DMan16.AxStats;
 
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.UUID;
-import java.util.function.Function;
-
-import javax.annotation.Nullable;
-
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.attribute.AttributeModifier.Operation;
-import org.bukkit.inventory.EquipmentSlot;
-
 import me.Aldreda.AxUtils.Classes.Pair;
 import me.Aldreda.AxUtils.Classes.Trio;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.attribute.AttributeModifier.Operation;
+import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.function.Function;
 
 public class AxStatType {
 	private static HashMap<String,AxStatType> stats = new HashMap<String,AxStatType>();
@@ -45,10 +44,18 @@ public class AxStatType {
 	}
 	
 	public AxStatType register() {
-		stats.put(Objects.requireNonNull(stats.containsKey(Objects.requireNonNull(key(),"Stat type key cannot be null!")) ? null :
-			Objects.requireNonNull(LineMethod == null ? null : key(),"LineMethod cannot be null!"),"The key: \"" + key() + "\" is already being used!"),this);
+		Objects.requireNonNull(key(),"Stat type key cannot be null!");
+		Objects.requireNonNull(LineMethod,"Stat type LineMethod cannot be null!");
+		if (stats.containsKey(key())) throw new IllegalArgumentException("The key: \"" + key() + "\" is already being used!");
+		stats.put(key(),this);
 		return this;
 	}
+	
+	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	public double getStatAmount(@NotNull Player player) {
+		return  0;
+	}
+	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	
 	public boolean isRegistered() {
 		return key() != null && stats.containsKey(key()) && stats.get(key()).equals(this);
