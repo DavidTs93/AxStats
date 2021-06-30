@@ -102,8 +102,8 @@ public class AxStatType {
 	public static Function<Pair<AxStatType,Trio<Float,Float,Boolean>>,Component> defaultAxStatFunctionSingle(TextColor color, @Nullable TextColor colorPlus,
 			@Nullable TextColor colorMinus, @Nullable TextColor colorValPlus, @Nullable TextColor colorValMinus, @Nullable TextColor colorPercent) {
 		return (info) -> {
-			float val = info.second().first;
-			boolean percent = info.second().third;
+			float val = info.second().first();
+			boolean percent = info.second().third();
 			TextColor plusColor = colorPlus == null ? color : colorPlus;
 			TextColor minusColor = colorMinus == null ? (colorPlus == null ? color : colorPlus) : colorMinus;
 			TextColor valColor = val >= 0 ? (colorValPlus == null ? colorPlus : colorValPlus) : (colorValMinus == null ? colorMinus : colorValMinus);
@@ -120,9 +120,9 @@ public class AxStatType {
 			@Nullable TextColor colorVal2Minus, @Nullable TextColor colorPercent, Component seperator, Component suffix, @Nullable TextColor colorSeperator,
 			@Nullable TextColor colorSuffix) {
 		return (info) -> {
-			float val1 = info.second().first;
-			float val2 = info.second().second;
-			boolean percent = info.second().third;
+			float val1 = info.second().first();
+			float val2 = info.second().second();
+			boolean percent = info.second().third();
 			TextColor plusColor = colorPlus == null ? color : colorPlus;
 			TextColor minusColor = colorMinus == null ? (colorPlus == null ? color : colorPlus) : colorMinus;
 			TextColor val1Color = val1 >= 0 ? (colorVal1Plus == null ? colorPlus : colorVal1Plus) : (colorVal1Minus == null ? colorMinus : colorVal1Minus);;
